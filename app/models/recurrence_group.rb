@@ -11,4 +11,5 @@
 class RecurrenceGroup < ApplicationRecord
   belongs_to :user
   has_many :recurrence_rules
+  has_many :link_subscriptions
 end
