@@ -10,19 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_01_042828) do
+ActiveRecord::Schema.define(version: 2020_09_06_052425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "link_subscriptions", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.bigint "recurrence_group_id", null: false
     t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["recurrence_group_id"], name: "index_link_subscriptions_on_recurrence_group_id"
-    t.index ["user_id"], name: "index_link_subscriptions_on_user_id"
   end
 
   create_table "recurrence_groups", force: :cascade do |t|
@@ -53,7 +51,6 @@ ActiveRecord::Schema.define(version: 2020_09_01_042828) do
   end
 
   add_foreign_key "link_subscriptions", "recurrence_groups"
-  add_foreign_key "link_subscriptions", "users"
   add_foreign_key "recurrence_groups", "users"
   add_foreign_key "recurrence_rules", "recurrence_groups"
 end
