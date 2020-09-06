@@ -12,4 +12,5 @@
 class LinkSubscription < ApplicationRecord
   belongs_to :user
   belongs_to :recurrence_group
+  has_many :recurrence_rules, through: :recurrence_group
 end
