@@ -5,7 +5,6 @@
 #  id                  :bigint           not null, primary key
 #  recurrence_group_id :bigint           not null
 #  day_of_week         :string
-#  frequency           :interval         default("7 days")
 #  start_time          :time
 #  end_time            :time
 #  created_at          :datetime         not null

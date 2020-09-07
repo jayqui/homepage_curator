@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: link_subscriptions
+#
+#  id                  :bigint           not null, primary key
+#  recurrence_group_id :bigint           not null
+#  url                 :string
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#
 require 'rails_helper'
 
 RSpec.describe LinkSubscription, type: :model do
