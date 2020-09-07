@@ -16,4 +16,8 @@ RSpec.describe User, type: :model do
     it { should have_many(:recurrence_groups) }
     it { should have_many(:link_subscriptions) }
   end
+
+  describe 'validations' do
+    it { should validate_presence_of(:email) }
+  end
 end

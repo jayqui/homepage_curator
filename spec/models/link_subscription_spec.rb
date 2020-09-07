@@ -15,4 +15,8 @@ RSpec.describe LinkSubscription, type: :model do
     it { should belong_to(:recurrence_group) }
     it { should have_many(:recurrence_rules) }
   end
+
+  describe 'validations' do
+    it { should validate_presence_of(:url) }
+  end
 end

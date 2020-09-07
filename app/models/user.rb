@@ -12,4 +12,7 @@
 class User < ApplicationRecord
   has_many :recurrence_groups
   has_many :link_subscriptions, through: :recurrence_groups
+
+  validates :email, presence: :true
+  validates :first_name, presence: :true
 end
