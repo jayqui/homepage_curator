@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe Types::QueryType do
+RSpec.describe Queries::RandomUrlQuery do
   describe "#random_url_for_current_time" do
     let(:day_of_week) { Time.zone.now.strftime("%A").downcase }
-    let(:start_time) { 1.hour.ago }
-    let(:end_time) { 1.hour.from_now }
+    let(:start_time) { 1.minute.ago }
+    let(:end_time) { 1.minute.from_now }
 
     let(:recurrence_rule) do
       create(:recurrence_rule, day_of_week: day_of_week, start_time: start_time, end_time: end_time)
@@ -12,11 +12,12 @@ RSpec.describe Types::QueryType do
     let(:recurrence_group) { create(:recurrence_group, recurrence_rules: [recurrence_rule]) }
     let!(:link_subscription) { create(:link_subscription, recurrence_group: recurrence_group) }
     let(:user) { recurrence_group.user }
+    let(:user_id) { user.id }
 
     let(:query) do
       <<-GRAPHQL
         {
-          randomUrlForCurrentTime(userId: #{user.id}) {
+          randomUrlForCurrentTime(userId: #{user_id}) {
             randomUrlForCurrentTime
           }
         }
@@ -38,6 +39,15 @@ RSpec.describe Types::QueryType do
       it "returns a null result" do
         result = subject.dig(:data, :randomUrlForCurrentTime, :randomUrlForCurrentTime)
         expect(result).to be_nil
+      end
+
+      context "when some are available, but for a different user" do
+        let(:user_id) { user.id + 1 }
+
+        it "returns a null result" do
+          result = subject.dig(:data, :randomUrlForCurrentTime, :randomUrlForCurrentTime)
+          expect(result).to be_nil
+        end
       end
     end
   end
