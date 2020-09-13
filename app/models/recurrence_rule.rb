@@ -14,13 +14,13 @@ class RecurrenceRule < ApplicationRecord
   belongs_to :recurrence_group
 
   enum day_of_week: {
-    sunday: "sunday",
     monday: "monday",
     tuesday: "tuesday",
     wednesday: "wednesday",
     thursday: "thursday",
     friday: "friday",
     saturday: "saturday",
+    sunday: "sunday",
   }
 
   validates :day_of_week, presence: :true
