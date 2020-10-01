@@ -30,6 +30,10 @@
 #   end
 # end
 
+DAY_NAMES = %w[monday tuesday wednesday thursday friday saturday sunday].
+
+DAY_NAMES.each { |day_name| DayOfWeek.create!(name: day_name) }
+
 # if Rails.env.production?
   jay = User.create!(
     first_name: "Jay",
