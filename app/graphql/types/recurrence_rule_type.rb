@@ -16,7 +16,7 @@ module Types
     end
 
     def days_of_week
-      object.day_of_weeks.pluck(:name)
+      object.days_of_week.pluck(:name)
     end
   end
 end

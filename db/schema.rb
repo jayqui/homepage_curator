@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 2020_10_02_014904) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "day_of_weeks", force: :cascade do |t|
-    t.string "name"
+  create_table "days_of_week", force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2020_10_02_014904) do
   end
 
   add_foreign_key "link_subscriptions", "recurrence_groups"
-  add_foreign_key "recurrence_days", "day_of_weeks"
+  add_foreign_key "recurrence_days", "days_of_week"
   add_foreign_key "recurrence_days", "recurrence_rules"
   add_foreign_key "recurrence_groups", "users"
   add_foreign_key "recurrence_rules", "recurrence_groups"

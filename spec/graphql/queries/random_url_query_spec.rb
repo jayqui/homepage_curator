@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Queries::RandomUrlQuery do
-  fixtures :day_of_weeks
+  fixtures :days_of_week
 
   describe "#random_url_for_current_time" do
-    let(:day_of_weeks) { DayOfWeek.all }
+    let(:days_of_week) { DayOfWeek.all }
     let(:start_time) { 1.minute.ago }
     let(:end_time) { 1.minute.from_now }
 
     let(:recurrence_rule) do
-      create(:recurrence_rule, day_of_weeks: day_of_weeks, start_time: start_time, end_time: end_time)
+      create(:recurrence_rule, days_of_week: days_of_week, start_time: start_time, end_time: end_time)
     end
     let(:recurrence_group) { create(:recurrence_group, recurrence_rules: [recurrence_rule]) }
     let!(:link_subscription) { create(:link_subscription, recurrence_group: recurrence_group) }

@@ -13,7 +13,7 @@
 #       3.times do
 #         RecurrenceRule.create(
 #           recurrence_group: recurrence_group,
-#           day_of_week: RecurrenceRule.day_of_weeks.keys.sample,
+#           day_of_week: RecurrenceRule.days_of_week.keys.sample,
 #           frequency: "1 week",
 #           start_time: "03:00",
 #           end_time: "21:00",
@@ -52,9 +52,12 @@ DAY_NAMES.each { |day_name| DayOfWeek.create!(name: day_name) }
     end_time: Time.zone.now.end_of_day,
   )
 
-  RecurrenceDay.create!(recurrence_rule: rr1, day_of_week: DayOfWeek.find_by(name: "monday"))
-  RecurrenceDay.create!(recurrence_rule: rr1, day_of_week: DayOfWeek.find_by(name: "tuesday"))
-  RecurrenceDay.create!(recurrence_rule: rr1, day_of_week: DayOfWeek.find_by(name: "wednesday"))
+  DayOfWeek.all.find_each do |day_of_week|
+    RecurrenceDay.create!(
+      recurrence_rule: rr1,
+      day_of_week: day_of_week,
+    )
+  end
 
   [
     'http://capitolweekly.net/',

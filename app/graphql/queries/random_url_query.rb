@@ -16,9 +16,9 @@ module Queries
       current_day_of_week = now_in_timezone.strftime("%A").downcase
 
       LinkSubscription.
-        joins(recurrence_rules: :day_of_weeks, recurrence_group: :user).
+        joins(recurrence_rules: :days_of_week, recurrence_group: :user).
         where(recurrence_groups: { user_id: user_id }).
-        where(recurrence_rules: { day_of_weeks: { name: current_day_of_week }}).
+        where(recurrence_rules: { days_of_week: { name: current_day_of_week }}).
         where("recurrence_rules.start_time < ?", now_in_timezone).
         where("recurrence_rules.end_time > ?", now_in_timezone).
         order("random()").first&.

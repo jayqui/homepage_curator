@@ -1,9 +1,9 @@
 # == Schema Information
 #
-# Table name: day_of_weeks
+# Table name: days_of_week
 #
 #  id         :bigint           not null, primary key
-#  name       :string
+#  name       :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
