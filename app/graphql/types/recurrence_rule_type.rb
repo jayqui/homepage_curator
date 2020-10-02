@@ -2,7 +2,9 @@ module Types
   class RecurrenceRuleType < Types::BaseObject
     field :id, ID, null: false
     field :recurrence_group_id, Integer, null: false
-    field :days_of_week, [String], null: true
+    field :begin_day, String, null: true
+    field :end_day, String, null: true
+    field :all_derived_days, String, null: true
     field :start_time, String, null: true
     field :end_time, String, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
@@ -13,10 +15,6 @@ module Types
 
     def end_time
       object.end_time.strftime("%H:%M:%S")
-    end
-
-    def days_of_week
-      object.days_of_week.pluck(:name)
     end
   end
 end

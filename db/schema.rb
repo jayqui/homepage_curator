@@ -10,16 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_02_014904) do
+ActiveRecord::Schema.define(version: 2020_10_02_045801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "days_of_week", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
 
   create_table "link_subscriptions", force: :cascade do |t|
     t.bigint "recurrence_group_id", null: false
@@ -27,15 +21,6 @@ ActiveRecord::Schema.define(version: 2020_10_02_014904) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["recurrence_group_id"], name: "index_link_subscriptions_on_recurrence_group_id"
-  end
-
-  create_table "recurrence_days", force: :cascade do |t|
-    t.bigint "recurrence_rule_id", null: false
-    t.bigint "day_of_week_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["day_of_week_id"], name: "index_recurrence_days_on_day_of_week_id"
-    t.index ["recurrence_rule_id"], name: "index_recurrence_days_on_recurrence_rule_id"
   end
 
   create_table "recurrence_groups", force: :cascade do |t|
@@ -52,6 +37,9 @@ ActiveRecord::Schema.define(version: 2020_10_02_014904) do
     t.time "end_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "begin_day"
+    t.string "end_day"
+    t.string "all_derived_days", default: [], array: true
     t.index ["recurrence_group_id"], name: "index_recurrence_rules_on_recurrence_group_id"
   end
 
@@ -64,8 +52,6 @@ ActiveRecord::Schema.define(version: 2020_10_02_014904) do
   end
 
   add_foreign_key "link_subscriptions", "recurrence_groups"
-  add_foreign_key "recurrence_days", "days_of_week"
-  add_foreign_key "recurrence_days", "recurrence_rules"
   add_foreign_key "recurrence_groups", "users"
   add_foreign_key "recurrence_rules", "recurrence_groups"
 end

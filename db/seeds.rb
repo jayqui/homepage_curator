@@ -30,10 +30,6 @@
 #   end
 # end
 
-DAY_NAMES = %w[monday tuesday wednesday thursday friday saturday sunday]
-
-DAY_NAMES.each { |day_name| DayOfWeek.create!(name: day_name) }
-
 # if Rails.env.production?
   jay = User.create!(
     first_name: "Jay",
@@ -50,14 +46,9 @@ DAY_NAMES.each { |day_name| DayOfWeek.create!(name: day_name) }
     recurrence_group: ca_news,
     start_time: Time.zone.now.midnight,
     end_time: Time.zone.now.end_of_day,
+    begin_day: :friday,
+    end_day: :monday,
   )
-
-  DayOfWeek.all.find_each do |day_of_week|
-    RecurrenceDay.create!(
-      recurrence_rule: rr1,
-      day_of_week: day_of_week,
-    )
-  end
 
   [
     'http://capitolweekly.net/',
