@@ -9,6 +9,6 @@
 #
 FactoryBot.define do
   factory :day_of_week do
-    name { "MyString" }
+    name { "monday" }
   end
 end

@@ -12,18 +12,9 @@
 #
 class RecurrenceRule < ApplicationRecord
   belongs_to :recurrence_group
+  has_many :recurrence_days
+  has_many :day_of_weeks, through: :recurrence_days
 
-  enum day_of_week: {
-    monday: "monday",
-    tuesday: "tuesday",
-    wednesday: "wednesday",
-    thursday: "thursday",
-    friday: "friday",
-    saturday: "saturday",
-    sunday: "sunday",
-  }
-
-  validates :day_of_week, presence: :true
   validates :start_time, presence: :true
   validates :end_time, presence: :true
 end

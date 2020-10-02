@@ -15,10 +15,11 @@ require 'rails_helper'
 RSpec.describe RecurrenceRule, type: :model do
   describe 'associations' do
     it { should belong_to(:recurrence_group) }
+    it { should have_many(:recurrence_days) }
+    it { should have_many(:day_of_weeks).through(:recurrence_days) }
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:day_of_week) }
     it { should validate_presence_of(:start_time) }
     it { should validate_presence_of(:end_time) }
   end

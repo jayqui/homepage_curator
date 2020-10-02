@@ -30,7 +30,7 @@
 #   end
 # end
 
-DAY_NAMES = %w[monday tuesday wednesday thursday friday saturday sunday].
+DAY_NAMES = %w[monday tuesday wednesday thursday friday saturday sunday]
 
 DAY_NAMES.each { |day_name| DayOfWeek.create!(name: day_name) }
 
@@ -46,14 +46,15 @@ DAY_NAMES.each { |day_name| DayOfWeek.create!(name: day_name) }
     name: "California News",
   )
 
-  RecurrenceRule.day_of_weeks.each do |day_of_week, _|
-    RecurrenceRule.create!(
-      recurrence_group: ca_news,
-      day_of_week: day_of_week,
-      start_time: Time.zone.now.midnight,
-      end_time: Time.zone.now.end_of_day,
-    )
-  end
+  rr1 = RecurrenceRule.create!(
+    recurrence_group: ca_news,
+    start_time: Time.zone.now.midnight,
+    end_time: Time.zone.now.end_of_day,
+  )
+
+  RecurrenceDay.create!(recurrence_rule: rr1, day_of_week: DayOfWeek.find_by(name: "monday"))
+  RecurrenceDay.create!(recurrence_rule: rr1, day_of_week: DayOfWeek.find_by(name: "tuesday"))
+  RecurrenceDay.create!(recurrence_rule: rr1, day_of_week: DayOfWeek.find_by(name: "wednesday"))
 
   [
     'http://capitolweekly.net/',
