@@ -1,5 +1,5 @@
-module Mutations
-  class LinkSubscriptionDelete < BaseMutation
+module Mutations::LinkSubscription
+  class LinkSubscriptionDelete < Mutations::BaseMutation
     argument :link_subscription_id, ID, required: true
 
     field :link_subscription, Types::LinkSubscriptionType, null: true

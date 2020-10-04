@@ -1,5 +1,5 @@
-module Mutations
-  class LinkSubscriptionCreate < BaseMutation
+module Mutations::LinkSubscription
+  class LinkSubscriptionCreate < Mutations::BaseMutation
     argument :recurrence_group_id, ID, required: true
     argument :url, String, required: true
 

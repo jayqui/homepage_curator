@@ -1,5 +1,5 @@
-module Mutations
-  class LinkSubscriptionUpdate < BaseMutation
+module Mutations::LinkSubscription
+  class LinkSubscriptionUpdate < Mutations::BaseMutation
     argument :link_subscription_id, ID, required: true
     argument :url, String, required: true
 
