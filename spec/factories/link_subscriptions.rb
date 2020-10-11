@@ -11,6 +11,6 @@
 FactoryBot.define do
   factory :link_subscription do
     association :user
-    url { "MyString" }
+    url { "http://example.com" }
   end
 end
