@@ -1,18 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe Mutations::RecurrenceRule::RecurrenceRuleDelete do
+RSpec.describe Mutations::RecurrenceGroup::RecurrenceGroupDelete do
   describe "#resolve" do
-    let!(:recurrence_rule) { create(:recurrence_rule) }
+    let!(:recurrence_group) { create(:recurrence_group) }
 
     let(:mutation) do
       <<-GRAPHQL
-        mutation recurrenceRuleDelete($recurrenceRuleId: ID!) {
-          recurrenceRuleDelete(input: {
-            recurrenceRuleId: $recurrenceRuleId,
+        mutation recurrenceGroupDelete($recurrenceGroupId: ID!) {
+          recurrenceGroupDelete(input: {
+            recurrenceGroupId: $recurrenceGroupId,
           }) {
-            recurrenceRule {
+            recurrenceGroup {
               id
-              recurrenceGroupId
             }
             errors
           }
@@ -24,7 +23,7 @@ RSpec.describe Mutations::RecurrenceRule::RecurrenceRuleDelete do
       HomepageCuratorSchema.execute(
         mutation,
         variables: {
-          recurrenceRuleId: recurrence_rule.id,
+          recurrenceGroupId: recurrence_group.id,
         }
       ).with_indifferent_access
     end
@@ -33,13 +32,13 @@ RSpec.describe Mutations::RecurrenceRule::RecurrenceRuleDelete do
       expect(subject[:errors]).to be_nil
     end
 
-    it "updates the RecurrenceRule" do
-      expect { subject }.to change { RecurrenceRule.count }.by(-1)
+    it "updates the RecurrenceGroup" do
+      expect { subject }.to change { RecurrenceGroup.count }.by(-1)
     end
 
     it "returns the appropriate data" do
-      result = subject.dig(:data, :recurrenceRuleDelete, :recurrenceRule)
-      expect(result[:id]).to eq(recurrence_rule.id.to_s)
+      result = subject.dig(:data, :recurrenceGroupDelete, :recurrenceGroup)
+      expect(result[:id]).to eq(recurrence_group.id.to_s)
     end
   end
 end
